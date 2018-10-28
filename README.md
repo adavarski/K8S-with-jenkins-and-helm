@@ -5,26 +5,32 @@ The accompanying presentation can be found on [SlideShare](https://www.slideshar
 ## Pre-reqs
 
 ```bash
-brew cask install minikube
+install minikube
 minikube start
 minikube addons enable ingress
 minikube addons enable registry
-brew install kubectl
-brew install kubernetes-helm
+install kubectl
+install helm
 ```
 
 ## Set up Helm
 
 ```bash
-helm init --wait
+helm init 
 ```
 
 ## Deploy Jenkins
 
 ```bash
-helm install --name cd -f overrides.yaml stable/jenkins
-printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
-minikube service cd-jenkins
+helm install
+  --name jenkins
+  --namespace jenkins
+  --values values.yml
+  stable/jenkins
+
+printf $(kubectl get secret --namespace jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+
+minikube service jenkins --namespace=jenkins
 ```
 
 ## Deploy app
