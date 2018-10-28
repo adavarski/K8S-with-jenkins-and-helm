@@ -89,6 +89,24 @@ NetworkPolicy:
 
 rbac:
   install: true
+  
+kubectl apply -f <file_name> .
+wget https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
+tar -zxvf helm-v2.11.0-linux-amd64.tar.gz 
+sudo cp  linux-amd64/helm /usr/local/bin/helm
+helm init
+
+N.B. 
+kubectl -n jenkins create sa jenkins
+kubectl create clusterrolebinding jenkins --clusterrole cluster-admin --serviceaccount=jenkins:jenkins
+
+Failed to count the # of live instances on Kubernetes
+io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://kubernetes.default/api/v1/namespaces/jenkins/pods?labelSelector=jenkins%3Dslave. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods is forbidden: User "system:serviceaccount:jenkins:default" cannot list pods in the namespace "jenkins".
+
+!!!! kubectl create clusterrolebinding default --clusterrole cluster-admin --serviceaccount=jenkins:default
+
+kubectl create namespace staging
+kubectl create clusterrolebinding default2 --clusterrole cluster-admin --serviceaccount=staging:default
 ```
 
 ## Deploy app
