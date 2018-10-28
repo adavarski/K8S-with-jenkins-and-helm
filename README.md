@@ -117,3 +117,11 @@ kubectl create clusterrolebinding default2 --clusterrole cluster-admin --service
 4. Uncomment the helm container and deploy stages in `Jenkinsfile`.
 5. Push changes and re-build.
 
+=========================================
+$ kubectl get pod --namespace=default
+NAME                   READY   STATUS    RESTARTS   AGE
+hello-65ff564d-dvhq5   1/1     Running   0          8m
+
+curl hello.192.168.99.100.nip.io
+
+Hello world!
