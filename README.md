@@ -31,6 +31,13 @@ helm install
 printf $(kubectl get secret --namespace jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
 minikube service jenkins --namespace=jenkins
+
+jenkins-namespace.yml 
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
 ```
 
 ## Deploy app
